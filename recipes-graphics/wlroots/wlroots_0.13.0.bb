@@ -12,16 +12,21 @@ DEPENDS = " \
 "
 
 SRC_URI = "https://github.com/swaywm/wlroots/releases/download/${PV}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "b84baefbaff7bb04b3d2c43cbacef1a433e2cd65111f8fbf4bfc5faaa4b34b08"
+SRC_URI[sha256sum] = "f6bea37fd4a6f5e5f552b83d61adae8c73e64b0bcb9ae0ab464ebcd9309d3cf3"
 
 inherit meson
 
+EXTRA_OEMESON = " \
+    -Dlibseat=disabled \
+    -Dxcb-errors=disabled \
+    -Dxwayland=disabled \
+"
+
 PACKAGECONFIG ??= " \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xwayland', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd x11', d)} \
+    xdg-foreign \
 "
 PACKAGECONFIG[systemd] = "-Dlogind=enabled -Dlogind-provider=systemd,-Dlogind=disabled"
-PACKAGECONFIG[xcb-errors] = "-Dxcb-errors=enabled,-Dxcb-errors=disabled"
-PACKAGECONFIG[xcb-icccm] = "-Dxcb-icccm=enabled,-Dxcb-icccm=disabled"
-PACKAGECONFIG[xwayland] = "-Dxwayland=enabled,-Dxwayland=disabled"
+PACKAGECONFIG[x11] = "-Dx11-backend=enabled,-Dx11-backend=disabled,xcb-util-renderutil"
 PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false"
+PACKAGECONFIG[xdg-foreign] = "-Dxdg-foreign=enabled,-Dxdg-foreign=disabled"

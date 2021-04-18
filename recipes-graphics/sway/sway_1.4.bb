@@ -40,7 +40,7 @@ PACKAGECONFIG[bash-completions] = "-Dbash-completions=true,-Dbash-completions=fa
 PACKAGECONFIG[fish-completions] = "-Dfish-completions=true,-Dfish-completions=false"
 PACKAGECONFIG[xwayland] = "-Dxwayland=enabled,-Dxwayland=disabled,,xkeyboard-config"
 PACKAGECONFIG[tray] = "-Dtray=enabled,-Dtray=disabled"
-PACKAGECONFIG[gdk-pixbuf] = "-Dgdk-pixbuf=enabled,-Dgdk-pixbuf=disabled"
+PACKAGECONFIG[gdk-pixbuf] = "-Dgdk-pixbuf=enabled,-Dgdk-pixbuf=disabled,gdk-pixbuf"
 
 PACKAGES += "${PN}-fish-completion ${PN}-zsh-completion"
 

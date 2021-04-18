@@ -18,7 +18,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "https://github.com/swaywm/sway/releases/download/${PV}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "e2805291fc01d49e21dda4b273e38170d1fff4e1757215439729edbed880dfbe"
+SRC_URI[sha256sum] = "9ecfd2f38239f7e90922a13cd348fc95fc059e8fa0e4b75b8ffcc7b61685a5fb"
 
 inherit bash-completion features_check gtk-icon-cache meson
 
@@ -29,7 +29,6 @@ EXTRA_OEMESON = "-Dman-pages=disabled"
 PACKAGECONFIG ??= " \
     wallpaper \
     bash-completions \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xwayland', '', d)} \
     tray \
     gdk-pixbuf \
 "
@@ -40,7 +39,7 @@ PACKAGECONFIG[bash-completions] = "-Dbash-completions=true,-Dbash-completions=fa
 PACKAGECONFIG[fish-completions] = "-Dfish-completions=true,-Dfish-completions=false"
 PACKAGECONFIG[xwayland] = "-Dxwayland=enabled,-Dxwayland=disabled,,xkeyboard-config"
 PACKAGECONFIG[tray] = "-Dtray=enabled,-Dtray=disabled"
-PACKAGECONFIG[gdk-pixbuf] = "-Dgdk-pixbuf=enabled,-Dgdk-pixbuf=disabled"
+PACKAGECONFIG[gdk-pixbuf] = "-Dgdk-pixbuf=enabled,-Dgdk-pixbuf=disabled,gdk-pixbuf"
 
 PACKAGES += "${PN}-fish-completion ${PN}-zsh-completion"
 
